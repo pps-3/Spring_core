@@ -1,0 +1,36 @@
+package com.example;
+
+import java.util.List;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        ApplicationContext context =
+                new AnnotationConfigApplicationContext(
+                        AppConfig.class);
+
+        ProductRepository repo =
+                context.getBean(
+                        ProductRepository.class);
+
+        List<Object[]> list =
+                repo.getProducts(1000);
+
+        for(Object[] row : list)
+        {
+            System.out.println(
+                    "Product Name : "
+                            + row[0]);
+
+            System.out.println(
+                    "Category Desc : "
+                            + row[1]);
+
+            System.out.println();
+        }
+    }
+}
